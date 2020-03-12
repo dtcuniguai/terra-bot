@@ -1,0 +1,30 @@
+version: '3.1'
+services:
+  redis:
+    image: redis
+    ports:
+      - 6379:6379
+
+  mongo:
+    image: mongo:4.0.12
+    restart: always
+    ports:
+      - 27017:27017
+    volumes:
+      - ./data/mongo:/data/db
+#    environment:
+#      MONGO_INITDB_ROOT_USERNAME: configuser
+#      MONGO_INITDB_ROOT_PASSWORD: Yvh4ZPxbHCt5TPLhdePB
+
+  mongo-express:
+    image: mongo-express
+    restart: always
+    ports:
+      - 8081:8081
+    # environment:
+    #   ME_CONFIG_BASICAUTH_USERNAME: configuser
+    #   ME_CONFIG_BASICAUTH_PASSWORD: Yvh4ZPxbHCt5TPLhdePB
+    #   ME_CONFIG_MONGODB_ADMINUSERNAME: configuser
+    #   ME_CONFIG_MONGODB_ADMINPASSWORD: Yvh4ZPxbHCt5TPLhdePB
+    depends_on:
+        - "mongo"
