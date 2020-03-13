@@ -4,22 +4,31 @@ from discord.ext import commands
 from dotenv import load_dotenv
 
 load_dotenv()
-bot = commands.Bot(command_prefix=os.getenv('BPREFIX'))
+token = os.getenv('BTOKEN')
+prefix = os.getenv('BPREFIX')
+
+bot = commands.Bot(command_prefix=prefix)
 
 
 @bot.event
 async def on_ready():
-    print('We have logged in as {0.user}'.format(bot))
-    print('>> Bot is online')
+    print('-------------------Terrar-Bot-----------------------')
+    print(f'Bot Token  :  {token}')
+    print(f'Bot Prefix :  {prefix}')
+    print('----------------------------------------------------')
+    print('>>Terra Bot is online !!!!!')
 
-@bot.event
-async def on_member_join(member):
-    channel = bot.get_channel(687240776828190730)
-    await channel.send("hihi")
 
 @bot.command()
-async def network(ctx):
+async def network(ctx, arg):
+    print(arg)
     await ctx.send(f'{bot.latency*1000}(ms)')
 
-print(os.getenv('BTOKEN'))
-bot.run(os.getenv('BTOKEN'))
+@bot.command()
+async def item(ctx, arg):
+    info = 'you are lookong for this item \n'
+    info += 'hellow workd\n'
+    info += arg
+    await ctx.send(info)
+
+bot.run(token)
