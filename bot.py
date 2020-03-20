@@ -21,7 +21,6 @@ async def on_ready():
 
 @bot.command()
 async def network(ctx, arg):
-    print(arg)
     await ctx.send(f'{bot.latency*1000}(ms)')
 
 @bot.command()
